@@ -1,0 +1,41 @@
+<resources>
+    <string name="app_name">LanguagePlanet</string>
+    <string name="titulo">Language Planet Alumnos</string>
+    <string name="basedatos">Lista de todos los Alumnos</string>
+    <string name="basedatos2">Introducir nuevo Alumno</string>
+    <string name="basedatos3">Consultar, Modificar y Borrar Alumno</string>
+
+    <string name="atras">Atrás</string>
+    <string name="textolista">Lista Alumnos</string>
+    <string name="lista">Ver Lista Alumnos</string>
+
+    <string name="nombreAlumno">Nombre y Apellidos</string>
+    <string name="telefono">Teléfono</string>
+    <string name="dirección">Dirección</string>
+    <string name="resultadosOficiales">Resultados Exámenes Oficiales (B1, B2, A1)</string>
+    <string name="examenesPracticas">Notas Exámenes Práctica</string>
+    <string name="CrearAlumno">Crear Alumno</string>
+    <string name="textoNombreAlumno">Nombre y Apellidos:</string>
+    <string name="textoTelefono">Teléfono:</string>
+    <string name="textoDirección">Dirección:</string>
+    <string name="textoResultadosOficiales">Resultados Exámenes Oficiales:</string>
+    <string name="textoExamenesPracticas">Notas Exámenes Práctica:</string>
+    <string name="textoNotasAcademia">Notas de la Academia:</string>
+
+    <string name="Ultimos">Últimos 5 años</string>
+    <string name="primerTrimestre">1er Trim.</string>
+    <string name="segundoTrimestre">2º Trim.</string>
+    <string name="tercerTrimestre">3er Trim.</string>
+    <string name="primerAño">1er Año</string>
+    <string name="segundoAño">2º Año</string>
+    <string name="tercerAño">3er Año</string>
+    <string name="cuartoAño">4º Año</string>
+    <string name="quintoAño">5º Año</string>
+    <string name="nota">Nota</string>
+
+    <string name="consultarTexto">CONSULTAR / MODIFICAR / BORRAR</string>
+    <string name="consultarAlumno">CONSULTAR ALUMNO</string>
+    <string name="consultar">CONSULTAR</string>
+
+
+</resources>
