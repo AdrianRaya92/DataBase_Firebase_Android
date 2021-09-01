@@ -19,7 +19,7 @@ class ModificarBD : AppCompatActivity() {
 
         //Conexión base de datos Firestore
         val db : FirebaseFirestore = FirebaseFirestore.getInstance()
-        //BD ejercicios
+        //BD alumno
         val alumnos = db.collection("alumnos")
 
         binding = ActivityModificarBdBinding.inflate(layoutInflater)
@@ -30,6 +30,7 @@ class ModificarBD : AppCompatActivity() {
             startActivity(intent)
         }
 
+        //Consulta del alumno
         binding.btnConsultar.setOnClickListener {
 
             var datos = ""
@@ -38,11 +39,11 @@ class ModificarBD : AppCompatActivity() {
             else {
 
                 var nombreConsulta: String = binding.etNombreConsulta.text.toString()
-                //Consultas para encontrar los ejercicios con dichos parametros
+                //Consultas para encontrar los alumnos con dichos parametros
                 alumnos.whereEqualTo("nombre", nombreConsulta)
                     .get()
                     .addOnSuccessListener { result ->
-                        //Bucle para encontrar todos los ejercicios que tengan los parámetros consultados
+                        //Bucle para encontrar todos los alumnos que tengan los parámetros consultados
                         for (documento in result) {
                             datos += "ALUMNO: ${documento.data.get("nombre")}\n" +
                                     "Teléfono: ${documento.data.get("telefono")}\n" +
@@ -81,6 +82,11 @@ class ModificarBD : AppCompatActivity() {
                     }
             }
         }
+
+        //Modificación de alumno
+
+
+        //Borrar alumno
 
     }
 }

@@ -3,6 +3,7 @@ package com.example.languageplanet
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import android.widget.Toast
 import com.example.languageplanet.databinding.ActivityCrearAlumnoBinding
 import com.google.firebase.firestore.FirebaseFirestore
@@ -19,6 +20,7 @@ class CrearAlumno : AppCompatActivity() {
         val db : FirebaseFirestore = FirebaseFirestore.getInstance()
         //BD alumnos
         val alumnos = db.collection("alumnos")
+        var crearAlumnoComprobacion = true
 
         binding = ActivityCrearAlumnoBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -62,21 +64,39 @@ class CrearAlumno : AppCompatActivity() {
                         "ter5trim" to binding.ettercerquinto.text.toString()
                 )
 
-                alumnos
-                        .document()
-                        .set(dato)
-                        .addOnSuccessListener { _ ->
-                            Toast.makeText(this,"Alumno creado correctamente", Toast.LENGTH_SHORT).show()
-                        }
-                        .addOnFailureListener { _ ->
-                            Toast.makeText(this,"Error Alumno ya existe", Toast.LENGTH_SHORT).show();
-                        }
+                var nombreConsulta: String = binding.etNombre.text.toString()
+                //Consultas para encontrar los alumnos con dichos parametros
+                alumnos.whereEqualTo("nombre", nombreConsulta)
+                    .get()
+                    .addOnSuccessListener { result ->
+                        crearAlumnoComprobacion = false
+                    }
+                    .addOnFailureListener { exception ->
+                        Toast.makeText(this,"Error de conexión a la base de datos", Toast.LENGTH_SHORT).show()
+                    }
 
+                //Variable de tiempo
+                val handler = Handler()
 
-
+                //Comprobacion de nombre y apellidos del alumno que vamos a crear y si existe no crearlo
+                handler.postDelayed({
+                    if(crearAlumnoComprobacion){
+                        alumnos
+                            .document()
+                            .set(dato)
+                            .addOnSuccessListener { _ ->
+                                Toast.makeText(this,"Alumno creado correctamente", Toast.LENGTH_LONG).show()
+                            }
+                            .addOnFailureListener { _ ->
+                                Toast.makeText(this,"Error de conexión a la base de datos", Toast.LENGTH_SHORT).show()
+                            }
+                    }
+                    else{
+                        Toast.makeText(this,"Error Alumno con el mismo Nombre y Apellidos en la Base de Datos", Toast.LENGTH_SHORT).show()
+                    }
+                }, 1000)
 
             }
-
 
         }
 

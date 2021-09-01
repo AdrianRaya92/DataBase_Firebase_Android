@@ -37,5 +37,13 @@
     <string name="consultarAlumno">CONSULTAR ALUMNO</string>
     <string name="consultar">CONSULTAR</string>
 
+    <string name="modificarAlumno">MODIFICAR ALUMNO</string>
+    <string name="modificar">MODIFICAR</string>
+
+    <string name="borrarAlumno">BORRAR ALUMNO</string>
+    <string name="borrar">BORRAR</string>
+
+    <string name="separacion">______________________________________________</string>
+
 
 </resources>

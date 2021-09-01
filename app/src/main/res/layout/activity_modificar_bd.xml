@@ -70,6 +70,7 @@
                     android:id="@+id/tvConsulta"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
                     android:text="@string/consultarAlumno"
                     android:textColor="#000000"/>
 
@@ -79,6 +80,27 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="30dp"
                     android:text="@string/consultar" />
+
+                <TextView
+                    android:id="@+id/tvSeparacion3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="30dp"
+                    android:text="@string/separacion"
+                    android:textColor="#000000"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/textView38"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:text="@string/modificarAlumno"
+                    android:textColor="#000000"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/textView36"
@@ -497,7 +519,7 @@
                     android:id="@+id/etNotasPracticas"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="30dp"
+                    android:layout_marginBottom="10dp"
                     android:gravity="top"
                     android:hint="@string/examenesPracticas"
                     android:importantForAutofill="no"
@@ -505,10 +527,66 @@
                     tools:ignore="TouchTargetSizeCheck"/>
 
                 <Button
-                    android:id="@+id/btnCrear"
+                    android:id="@+id/btnModificar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/CrearAlumno" />
+                    android:layout_marginBottom="30dp"
+                    android:text="@string/modificar" />
+
+                <TextView
+                    android:id="@+id/tvSeparacion"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="30dp"
+                    android:text="@string/separacion"
+                    android:textColor="#000000"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/textView39"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:text="@string/borrarAlumno"
+                    android:textColor="#000000"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/textView40"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/textoNombreAlumno"
+                    android:textColor="#000000"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/etNombreBorrar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:hint="@string/nombreAlumno"
+                    android:importantForAutofill="no"
+                    android:inputType="text"
+                    tools:ignore="TouchTargetSizeCheck"/>
+
+                <TextView
+                    android:id="@+id/tvBorrar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:text="@string/borrarAlumno"
+                    android:textColor="#000000"/>
+
+                <Button
+                    android:id="@+id/btnBorrar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/borrar" />
+
             </LinearLayout>
         </ScrollView>
 
