@@ -1,0 +1,1 @@
+Para que la aplicación funcione correctamente, se debe agregar el google-services.json de la base de datos Firebase dentro del proyecto, en la carpeta src
