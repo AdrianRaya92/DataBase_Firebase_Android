@@ -20,7 +20,7 @@ class CrearAlumno : AppCompatActivity() {
         val db : FirebaseFirestore = FirebaseFirestore.getInstance()
         //BD alumnos
         val alumnos = db.collection("alumnos")
-        var crearAlumnoComprobacion = true
+
 
         binding = ActivityCrearAlumnoBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -30,7 +30,10 @@ class CrearAlumno : AppCompatActivity() {
             startActivity(intent)
         }
 
+        var crearAlumnoComprobacion = true
         binding.btnCrear.setOnClickListener{
+            crearAlumnoComprobacion = true
+
             if(binding.etNombre.text.isBlank()) Toast.makeText(this,"Error campo Nombre y Apellidos vacio", Toast.LENGTH_SHORT).show();
             else if(binding.etTelefono.text.isBlank()) Toast.makeText(this,"Error campo Teléfono vacio", Toast.LENGTH_SHORT).show();
             else if(binding.etDireccion.text.isBlank()) Toast.makeText(this,"Error campo Direccion vacio", Toast.LENGTH_SHORT).show();
@@ -41,7 +44,37 @@ class CrearAlumno : AppCompatActivity() {
                     binding.etDireccion.text.isNotBlank() && binding.etExamenesOficiales.text.isNotBlank()
                     && binding.etNotasPracticas.text.isNotBlank()){
 
-                val dato = hashMapOf(
+
+
+                //Variable de tiempo
+                val handler = Handler()
+
+                handler.postDelayed({
+                    //Consulta del alumno en BD
+                    var datos = ""
+                    var nombreConsulta: String = binding.etNombre.text.toString()
+                    //Consultas para encontrar los alumnos con dichos parametros
+                    alumnos.whereEqualTo("nombre", nombreConsulta)
+                        .get()
+                        .addOnSuccessListener { result ->
+                            //Comprobación para ver si el alumno esta en la base de datos
+                            for (documento in result) {
+                                datos += "ALUMNO"
+                            }
+                            if (datos.equals("")){
+                                crearAlumnoComprobacion = true
+                            }
+                            else {
+                                crearAlumnoComprobacion = false
+                            }
+                        }
+                        .addOnFailureListener { exception ->
+                            Toast.makeText(this,"Error de conexión a la base de datos", Toast.LENGTH_SHORT).show()
+                        }
+
+
+                    //Datos para registrar al alumno
+                    var dato = hashMapOf(
                         "nombre" to binding.etNombre.text.toString(),
                         "telefono" to binding.etTelefono.text.toString(),
                         "direccion" to binding.etDireccion.text.toString(),
@@ -62,39 +95,51 @@ class CrearAlumno : AppCompatActivity() {
                         "prim5trim" to binding.etprimerquinto.text.toString(),
                         "seg5trim" to binding.etsegundoquinto.text.toString(),
                         "ter5trim" to binding.ettercerquinto.text.toString()
-                )
+                    )
 
-                var nombreConsulta: String = binding.etNombre.text.toString()
-                //Consultas para encontrar los alumnos con dichos parametros
-                alumnos.whereEqualTo("nombre", nombreConsulta)
-                    .get()
-                    .addOnSuccessListener { result ->
-                        crearAlumnoComprobacion = false
-                    }
-                    .addOnFailureListener { exception ->
-                        Toast.makeText(this,"Error de conexión a la base de datos", Toast.LENGTH_SHORT).show()
-                    }
+                    //Comprobacion de nombre y apellidos del alumno que vamos a crear y si existe no crearlo
+                    handler.postDelayed({
+                        if(crearAlumnoComprobacion==true){
+                            alumnos
+                                .document()
+                                .set(dato)
+                                .addOnSuccessListener { _ ->
+                                    Toast.makeText(this,"Alumno creado correctamente", Toast.LENGTH_LONG).show()
+                                    //Con la creación del Alumno se ponen todos los campos vacíos para introducir un nuevo alumno
+                                    binding.etNombre.setText("")
+                                    binding.etTelefono.setText("")
+                                    binding.etDireccion.setText("")
+                                    binding.etExamenesOficiales.setText("")
+                                    binding.etNotasPracticas.setText("")
+                                    binding.etprimerprimer.setText("")
+                                    binding.etsegundoprimer.setText("")
+                                    binding.ettercerprimer.setText("")
+                                    binding.etprimersegundo.setText("")
+                                    binding.etsegundosegundo.setText("")
+                                    binding.ettercersegundo.setText("")
+                                    binding.etprimertercer.setText("")
+                                    binding.etsegundotercer.setText("")
+                                    binding.ettercertercer.setText("")
+                                    binding.etprimercuarto.setText("")
+                                    binding.etsegundocuarto.setText("")
+                                    binding.ettercercuarto.setText("")
+                                    binding.etprimerquinto.setText("")
+                                    binding.etsegundoquinto.setText("")
+                                    binding.ettercerquinto.setText("")
+                                }
+                                .addOnFailureListener { _ ->
+                                    Toast.makeText(this,"Error de conexión a la base de datos", Toast.LENGTH_SHORT).show()
+                                }
+                        }
+                        else if(crearAlumnoComprobacion==false){
+                            Toast.makeText(this,"Error Alumno con el mismo Nombre y Apellidos en la Base de Datos", Toast.LENGTH_SHORT).show()
+                        }
 
-                //Variable de tiempo
-                val handler = Handler()
+                        crearAlumnoComprobacion = true
+                    }, 500)
+                }, 500)
 
-                //Comprobacion de nombre y apellidos del alumno que vamos a crear y si existe no crearlo
-                handler.postDelayed({
-                    if(crearAlumnoComprobacion){
-                        alumnos
-                            .document()
-                            .set(dato)
-                            .addOnSuccessListener { _ ->
-                                Toast.makeText(this,"Alumno creado correctamente", Toast.LENGTH_LONG).show()
-                            }
-                            .addOnFailureListener { _ ->
-                                Toast.makeText(this,"Error de conexión a la base de datos", Toast.LENGTH_SHORT).show()
-                            }
-                    }
-                    else{
-                        Toast.makeText(this,"Error Alumno con el mismo Nombre y Apellidos en la Base de Datos", Toast.LENGTH_SHORT).show()
-                    }
-                }, 1000)
+
 
             }
 
